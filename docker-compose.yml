@@ -1,0 +1,28 @@
+version: '3'
+services:
+  tempconverter:
+    image: lcabraja/tempconverter:latest
+    environment:
+      - DB_USER=tempconverter
+      - DB_PASS=tempconverterpassword
+      - DB_HOST=mysql
+      - DB_NAME=tempconverter
+      - STUDENT=Luka Čabraja
+      - COLLEGE=Algebruh
+    ports:
+      - "5000:5000"
+    depends_on:
+        mysql:
+            condition: service_started
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=tempconverter
+      - MYSQL_PASSWORD=tempconverterpassword
+      - MYSQL_DATABASE=tempconverter
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
