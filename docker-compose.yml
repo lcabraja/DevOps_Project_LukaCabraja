@@ -2,7 +2,6 @@ version: '3'
 services:
   tempconverter:
     image: lcabraja/tempconverter:latest
-    command: "flask run --host=0.0.0.0"
     environment:
       - DB_USER=tempconverter
       - DB_PASS=tempconverterpassword
