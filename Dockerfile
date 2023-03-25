@@ -17,7 +17,7 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 EXPOSE 5000
 
 # Define environment variables
-ENV FLASK_APP=tempconverter.py
+ENV FLASK_APP=app.py
 
 # Run the command to start the Flask application
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["flask", "run"]
