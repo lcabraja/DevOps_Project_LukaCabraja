@@ -2,7 +2,7 @@ version: '3'
 services:
   tempconverter:
     image: lcabraja/tempconverter:latest
-    command: "flask run"
+    command: "flask run --host=0.0.0.0"
     environment:
       - DB_USER=tempconverter
       - DB_PASS=tempconverterpassword
@@ -12,7 +12,7 @@ services:
       - COLLEGE=Algebruh
       - FLASK_APP=app.py
     ports:
-      - "6000:5000"
+      - "5050:5000"
     depends_on:
         mysql:
             condition: service_started
