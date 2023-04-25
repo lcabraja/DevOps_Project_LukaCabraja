@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  tempconverter:
+    image: lcabraja/tempconverter:latest
+    environment:
+      DB_USER: tempconverter_user
+      DB_PASS: tempconverter_pass
+      DB_HOST: db
+      DB_NAME: tempconverter_db
+      STUDENT: Luka Cabraja
+      COLLEGE: Algebra University College
+    ports:
+      - "80:5000"
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+    networks:
+      - tempconverter_network
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: tempconverter_root_pass
+      MYSQL_DATABASE: tempconverter_db
+      MYSQL_USER: tempconverter_user
+      MYSQL_PASSWORD: tempconverter_pass
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - tempconverter_network
+
+networks:
+  tempconverter_network:
+
+volumes:
+  db_data:
+
