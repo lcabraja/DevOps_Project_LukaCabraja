@@ -11,7 +11,7 @@ services:
       - COLLEGE=Algebruh
       - FLASK_APP=app.py
     ports:
-      - "5050:5000"
+      - "8080:8080"
     depends_on:
         mysql:
             condition: service_started

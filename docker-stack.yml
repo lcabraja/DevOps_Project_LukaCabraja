@@ -11,7 +11,7 @@ services:
       STUDENT: Luka Cabraja
       COLLEGE: Algebra University College
     ports:
-      - "80:5000"
+      - "80:8080"
     deploy:
       replicas: 2
       update_config:
