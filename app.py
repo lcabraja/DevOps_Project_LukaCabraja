@@ -6,9 +6,23 @@ from wtforms.validators import InputRequired
 from datetime import datetime
 from os import environ
 
-app = Flask(__name__)
-# Configure secret key for flask - used for session sharing
-app.config['SECRET_KEY'] = 'your-secret-key'
+# app = Flask(__name__)
+# # Configure secret key for flask - used for session sharing
+# app.config['SECRET_KEY'] = 'your-secret-key'
+
+def create_app():
+    app = Flask(__name__)
+    # Configure secret key for flask - used for session sharing
+    app.config['SECRET_KEY'] = 'your-secret-key'
+
+    # ... [rest of your code as before] ...
+
+    if __name__ == '__main__':
+        app.run(host='0.0.0.0', port=5000, debug=True)
+
+    return app
+
+app = create_app()
 
 # Configure database details, these need to be changed depending on how you configured mysql container
 db_user = environ.get('DB_USER', 'CHANGEME')
@@ -53,5 +67,5 @@ def index():
     log_entries = [(t.date.strftime('%m/%d/%Y %I:%M:%S %p'), t.celsius, t.fahrenheit, t.ip_address, t.user_agent.split()[0], ) for t in temperatures]
     return render_template('index.html', form=form, log_entries=log_entries, student=student, college=college)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=5000, debug=True)

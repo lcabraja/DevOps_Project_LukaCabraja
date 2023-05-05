@@ -13,11 +13,14 @@ RUN apt-get update && apt-get upgrade -y
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
+# Install a production WSGI server
+RUN pip install waitress Flask
+
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
 # Define environment variables
-ENV FLASK_APP=app.py
+ENV FLASK_APP=app.py:create_app
 
 # Run the command to start the Flask application
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["waitress-serve", "--call", "app:create_app"]
